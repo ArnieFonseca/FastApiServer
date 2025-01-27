@@ -1,15 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from calculator import add, sub, mul
+ 
 
+from routes.calculator import routerCalc
 app = FastAPI()
+app.include_router(routerCalc)
 
-
-# @app.get("/")
-# async def root():
-#     return {"message": "Welcome to Fast API for Python"}
+ 
 origins = [
-
     "http://localhost:4200"
 ]
 
@@ -21,30 +19,4 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/calc/add/{fst}/{snd}")
-async def calc_add(fst:float, snd:float)->dict[str,float]:
-    """API to add two  numbers"""
-
-    rst:float = add(fst, snd)
-    return {"result": rst}
-
-@app.get("/calc/sub/{fst}/{snd}")
-async def calc_sub(fst:float, snd:float)->dict[str,float]:
-    """API to sub two  numbers"""
-
-    rst:float = sub(fst, snd)
-    return {"result": rst}
-
-@app.get("/calc/mul/{fst}/{snd}")
-async def calc_sub(fst:float, snd:float)->dict[str,float]:
-    """API to mul two  numbers"""
-
-    rst:float = mul(fst, snd)
-    return {"result": rst}
-
-@app.get("/calc/operations/")
-async def calc_operations()->dict[str,list[str]]:
-    """API to get operations"""
-
-    rst:list[str] = ["add", "mul", "sub"]
-    return {"operations": rst}
+# Start the Server ==> fastapi dev main.py   
