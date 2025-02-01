@@ -9,3 +9,7 @@ def sub (a:int, b:int)->int:
 def mul (a:int, b:int)->int:
     """ Mul two numbers"""
     return a * b
+
+def div (a:int, b:int)->int:
+    """ Mul two numbers"""
+    return a / b
