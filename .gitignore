@@ -1,5 +1,7 @@
 .venv
-**__pycache__/*.pyc
+**__pycache__/
+**.pyc
+routes/__pycache__/calculator.cpython-312.pyc
 
 
 
