@@ -2,6 +2,7 @@ from fastapi import APIRouter
 from services.calculator import  add, sub, mul, div
 from models.result import Result
 from models.operations import Operations
+from repository.operations  import get_operations
 
 # default preix to calc and taag the API Documentation
 routerCalc  =  APIRouter(
@@ -42,7 +43,8 @@ async def calc_div(fst:float, snd:float) :
 @routerCalc.get("/operations/")
 async def calc_operations():
     """API to get operations"""
-     
-    rst:Operations = Operations(result = ["add", "mul", "sub", "div"])
+
+    operationList =  get_operations() 
+    rst:Operations = Operations(result = operationList)
     return rst
      
