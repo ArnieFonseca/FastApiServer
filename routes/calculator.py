@@ -1,3 +1,4 @@
+"""Calutulor Routes"""
 from fastapi import APIRouter
 from services.calculator import  add, sub, mul, div
 from models.result import Result
@@ -8,7 +9,7 @@ from repository.operations  import get_operations
 routerCalc  =  APIRouter(
     tags=["Calculator"], 
     prefix="/calc")
-
+"""Calutulor Routes variable"""
 
 @routerCalc.get("/add/{fst}/{snd}")
 async def calc_add(fst:float, snd:float) :
@@ -16,7 +17,6 @@ async def calc_add(fst:float, snd:float) :
 
     rst:Result = Result(result = add(fst, snd))
     return rst
-
 
 @routerCalc.get("/sub/{fst}/{snd}")
 async def calc_sub(fst:float, snd:float) :
