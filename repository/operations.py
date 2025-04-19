@@ -1,6 +1,7 @@
 """Repositoty to get operations from Datatabase"""
 from typing import  Final
-from sqlmodel import Field, Session, SQLModel, create_engine,select
+from sqlmodel import Field, Session, SQLModel, create_engine,select, Sequence
+from sqlmodel.sql.expression import SelectOfScalar
  
 class Operation(SQLModel,  table=True):
     id: int | None = Field(default=None, primary_key=True)
@@ -19,7 +20,7 @@ def get_operations()->list[str]:
     Retrieve operation from thje Database
     """
     with Session(__engine) as session:
-        statement = select(Operation)
-        results = session.exec(statement).all()
+        statement:SelectOfScalar[Operation] = select(Operation)
+        results:Sequence[Operation] = session.exec(statement).all()
         rst:list[str] = list(map(lambda x: x.name, results))
         return rst

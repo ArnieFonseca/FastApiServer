@@ -5,7 +5,7 @@ from models.result import Result
 from models.operations import Operations
 from repository.operations  import get_operations
 
-# default preix to calc and taag the API Documentation
+# default preix to calc and tag the API Documentation
 routerCalc  =  APIRouter(
     tags=["Calculator"], 
     prefix="/calc")
