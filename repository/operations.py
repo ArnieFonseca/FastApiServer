@@ -1,4 +1,4 @@
-"""Repositoty to get operations from Datatabase"""
+"""Repository to get operations from Datatabase"""
 from typing import  Final
 from sqlmodel import Field, Session, SQLModel, create_engine,select, Sequence
 from sqlmodel.sql.expression import SelectOfScalar
@@ -17,7 +17,7 @@ SQLModel.metadata.create_all(__engine)
 def get_operations()->list[str]:
     """
     get_operations: List of String\n
-    Retrieve operation from thje Database
+    Retrieve operations from the Database
     """
     with Session(__engine) as session:
         statement:SelectOfScalar[Operation] = select(Operation)
