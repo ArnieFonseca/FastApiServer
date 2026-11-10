@@ -1,35 +1,34 @@
-"""Calutulor Routes"""
+"""Calculator Routes"""
 from fastapi import APIRouter
-from services.calculator import  add, sub, mul, div
 from models.result import Result
 from models.operations import Operations
-from repository.operations  import get_operations
+from controllers.calculator import add_operation, sub_operation, mul_operation, div_operation, retrieve_operations
 
-# default preix to calc and tag the API Documentation
+# default prefix to calc and tag the API Documentation
 routerCalc  =  APIRouter(
     tags=["Calculator"], 
     prefix="/calc")
-"""Calutulor Routes variable"""
+"""Calculator Routes end-points"""
 
 @routerCalc.get("/add/{fst}/{snd}")
 async def calc_add(fst:float, snd:float) :
     """API to add two  numbers"""
 
-    rst:Result = Result(result = add(fst, snd))
+    rst:Result = await add_operation(fst, snd)
     return rst
 
 @routerCalc.get("/sub/{fst}/{snd}")
 async def calc_sub(fst:float, snd:float) :
     """API to sub two  numbers"""
 
-    rst:Result = Result(result = sub(fst, snd))
+    rst:Result = await sub_operation(fst, snd)
     return rst
 
 @routerCalc.get("/mul/{fst}/{snd}")
-async def calc_sub(fst:float, snd:float) :
+async def calc_mul(fst:float, snd:float) :
     """API to mul two  numbers"""
 
-    rst:Result = Result(result = mul(fst, snd))
+    rst:Result = await mul_operation(fst, snd)
     return rst
  
 
@@ -37,14 +36,13 @@ async def calc_sub(fst:float, snd:float) :
 async def calc_div(fst:float, snd:float) :
     """API to div two  numbers"""
 
-    rst:Result = Result(result = div(fst, snd))
+    rst:Result = await div_operation(fst, snd)
     return rst
 
 @routerCalc.get("/operations/")
 async def calc_operations():
     """API to get operations"""
 
-    operationList =  get_operations() 
-    rst:Operations = Operations(result = operationList)
+    rst:Operations = await retrieve_operations()
     return rst
      

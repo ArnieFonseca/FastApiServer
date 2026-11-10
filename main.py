@@ -5,18 +5,14 @@ import uvicorn
 
 from routes.calculator import routerCalc
 app = FastAPI()
-app.include_router(routerCalc)
- 
-origins = [
-    "http://localhost:4200"
-]
+app.include_router(routerCalc) 
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_origins=["*"],        # Allow Any Domain
+    allow_credentials=True,     # Allows cookies and authentication headers
+    allow_methods=["*"],        # Allows all HTTP methods
+    allow_headers=["*"],        # Allows all headers
 )
 
 if __name__ == "__main__":
